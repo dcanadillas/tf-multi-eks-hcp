@@ -61,7 +61,7 @@ resource "hcp_aws_network_peering" "consul_client" {
   # count = length(var.vpc)
   # hvn_id          = var.create_hcp ? hcp_hvn.main[0].hvn_id : data.hcp_consul_cluster.main[0].hvn_id
   hvn_id = var.hvn_id
-  peering_id      = "consul-clients-${var.hvn_id}"
+  peering_id      = "${var.peering_prefix}-${var.hvn_id}"
   peer_vpc_id     = var.vpc.vpc_id
   peer_account_id = var.vpc.vpc_owner_id
   peer_vpc_region = data.aws_arn.peer.region
@@ -71,11 +71,11 @@ resource "hcp_aws_network_peering" "consul_client" {
 }
 
 resource "hcp_hvn_route" "to_consul_client" {
-  # count = length(var.vpc)
+  count = length(var.subnet_cidr_block)
   # for_each = { for k,v in var.vpc : k => v }
   hvn_link         = var.hvn_self_link
-  hvn_route_id     = "consul-client-${var.hvn_id}"
-  destination_cidr = var.hvn_cidr_block
+  hvn_route_id     = "${var.peering_prefix}-${var.hvn_id}-${count.index}"
+  destination_cidr = var.subnet_cidr_block[count.index]
   target_link      = hcp_aws_network_peering.consul_client.self_link
 }
 

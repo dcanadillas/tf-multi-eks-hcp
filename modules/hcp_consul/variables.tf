@@ -1,6 +1,6 @@
 variable "hcp_cluster_name" {
   description = "The cluster name for HCP Consul"
-  default = "consul-cluster"
+  # default = "consul-cluster"
 }
 
 variable "create_hcp" {

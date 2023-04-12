@@ -33,3 +33,12 @@ variable "connect_hcp" {
   default =false
 }
 
+variable "create_hcp" {
+  description = "Set it to true if you to create the HCP Consul cluster. Only one HCP Consul datacenter is supported by now"
+  default = false
+}
+
+variable "hcp_cluster_name" {
+  description = "The name/ID of your HCP Consul cluster. If \"create_hcp\" variable is true, this variable will be the name of the cluster to create."
+}
+

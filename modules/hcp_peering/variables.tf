@@ -14,6 +14,10 @@ variable "hvn_region" {
   description = "The HVN region for the HCP Consul cluster"
 }
 
+variable "peering_prefix" {
+  description = "A prefix to be used on some resources names like route ids"
+}
+
 variable "vpc" {
   description = "The VPC values"
   type = object({
@@ -33,5 +37,8 @@ variable "hvn_self_link" {
 }
 
 variable "hvn_cidr_block" {
-  
+}
+
+variable "subnet_cidr_block" {
+  type = list(string)
 }
