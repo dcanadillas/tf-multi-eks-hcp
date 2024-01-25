@@ -15,3 +15,8 @@ output "eks_token" {
   value = [ for cluster in data.aws_eks_cluster_auth.eks_clusters : cluster.token ]
   sensitive = true
 }
+
+output "eks_clusters" {
+  value = data.aws_eks_cluster_auth.eks_clusters[*]
+  sensitive = true
+}

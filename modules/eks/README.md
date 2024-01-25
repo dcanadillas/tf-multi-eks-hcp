@@ -10,4 +10,5 @@ module "eks_clusters" {
   node_group_desired_capacity = 3
   node_group_instance_type  = "t3.small"
   subnet_ids                = ["subnet-
+}
 ```

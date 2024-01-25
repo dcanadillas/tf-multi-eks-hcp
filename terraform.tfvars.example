@@ -1,3 +1,5 @@
 region = "eu-west-1"
-use_fargate = true
+use_fargate = false
 cluster_names = [ "mycluster-eks-0", "mycluster-eks-1" ]
+k8s_version = "1.27"
+connect_hcp = false

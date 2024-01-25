@@ -14,7 +14,7 @@ terraform {
     }
     hcp = {
       source  = "hashicorp/hcp"
-      version = "0.56.0"
+      version = "0.81.0"
     }
   }
 }
@@ -22,3 +22,4 @@ terraform {
 provider "aws" {
   region = var.region
 }
+provider "hcp" {}

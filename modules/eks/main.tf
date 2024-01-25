@@ -7,6 +7,7 @@ resource "aws_eks_cluster" "eks_clusters" {
   # name     = var.cluster_names[count.index]
   name = var.cluster_name
   role_arn = aws_iam_role.eks_cluster.arn
+  version = var.k8s_version
 
   vpc_config {
     subnet_ids = var.subnet_ids

@@ -42,3 +42,8 @@ variable "hcp_cluster_name" {
   description = "The name/ID of your HCP Consul cluster. If \"create_hcp\" variable is true, this variable will be the name of the cluster to create."
 }
 
+variable "k8s_version" {
+  description = "The Kubernetes version to use for the EKS clusters"
+  default     = "1.26"
+  
+}

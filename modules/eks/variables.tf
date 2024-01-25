@@ -31,3 +31,8 @@ variable "subnet_ids" {
 variable "use_fargate" {
   default = false
 }
+
+variable "k8s_version" {
+  description = "The Kubernetes version to use for the EKS clusters"
+  default     = "1.26"
+}

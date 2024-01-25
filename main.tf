@@ -36,6 +36,7 @@ module "eks_clusters" {
   node_group_instance_type  = var.node_group_instance_type
   subnet_ids                = module.vpc[count.index].private_subnets
   use_fargate = var.use_fargate
+  k8s_version = var.k8s_version
 }
 
 module "hcp_consul" {
