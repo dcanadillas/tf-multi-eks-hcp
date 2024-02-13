@@ -47,3 +47,12 @@ variable "k8s_version" {
   default     = "1.26"
   
 }
+
+variable "hcp_connection_type" {
+  description = "The type of connection to be created between the EKS and HCP Consul clusters. Values: tgw, peering"
+  default = "tgw"
+  validation {
+    condition = contains(["tgw", "peering"], var.hcp_connection_type)
+    error_message = "The variable hcp_connection_type must be either \"tgw\" or \"peering\""
+  }
+}

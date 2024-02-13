@@ -36,3 +36,7 @@ variable "k8s_version" {
   description = "The Kubernetes version to use for the EKS clusters"
   default     = "1.26"
 }
+variable "suffix" {
+  description = "A suffix to be used on some resources names like roles or policies"
+  type = string
+}

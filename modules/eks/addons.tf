@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "addon_assume_role_policy" {
 
 resource "aws_iam_role" "addon_ebs_csi" {
   assume_role_policy = data.aws_iam_policy_document.addon_assume_role_policy.json
-  name               = "eks-ebs-csi-role"
+  name               = "eks-ebs-csi-role-${var.suffix}"
 }
 
 resource "aws_iam_role_policy_attachment" "addon_ebs_csi" {
@@ -49,6 +49,11 @@ data "aws_eks_addon_version" "latest" {
 }
 
 resource "aws_eks_addon" "ebs-csi" {
+  depends_on = [
+    aws_iam_role_policy_attachment.addon_ebs_csi,
+    aws_iam_openid_connect_provider.example,
+    aws_eks_node_group.main
+  ]
   cluster_name                = aws_eks_cluster.eks_clusters.name
   addon_name                  = "aws-ebs-csi-driver"
   addon_version               = data.aws_eks_addon_version.latest.version

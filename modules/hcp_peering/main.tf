@@ -6,12 +6,12 @@ resource "random_id" "server" {
   byte_length = 2
 }
 
-locals {
-  vpc_region = var.aws_region
-  hvn_region = var.hvn_region
-  cluster_id = var.create_hcp ? "${var.cluster_name}-${random_id.server.dec}" : var.cluster_name
-  hvn_id     = "consul-hvn-${random_id.server.dec}"
-}
+# locals {
+#   vpc_region = var.aws_region
+#   hvn_region = var.hvn_region
+#   cluster_id = var.create_hcp ? "${var.cluster_name}-${random_id.server.dec}" : var.cluster_name
+#   hvn_id     = "consul-hvn-${random_id.server.dec}"
+# }
 
 
 # # The HVN created in HCP

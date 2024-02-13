@@ -97,3 +97,6 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
 #   instance_types          = var.use_fargate ? null : [var.node_group_instance_type]
 #   # capacity_type           = var.use_fargate ? "FARGATE" : "ON_DEMAND"
 # }
+
+
+
