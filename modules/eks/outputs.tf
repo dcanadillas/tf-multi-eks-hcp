@@ -11,6 +11,10 @@ output "kubeconfig-ca-data" {
   value = aws_eks_cluster.eks_clusters.certificate_authority[0].data
 }
 
+output "cluster_name" {
+  value = aws_eks_cluster.eks_clusters.name
+}
+
 # # output "node_group_arns" {
 # #   description = "The ARNs of the node groups created for each EKS cluster"
 # #   value       = [for node_group in aws_eks_node_group.node_groups : node_group.arn]
