@@ -39,7 +39,11 @@ You can create a number of EKS clusters and configure the HCP platform to be abl
 
 ### Using HCP Peering
 
-If you want to peer every VPC of the EKS clusters to HCP platform:
+You can connect the EKS clusters for your Consul Admin Partitions [using VPC Peering for HCP](https://developer.hashicorp.com/hcp/tutorials/networking/amazon-peering-hcp).
+
+![HCP Consul with VPC Peering](./docs/hcp-consul-peering.png)
+
+To do that from the Terraform config, just use the right variable values with `hcp_connection_type`:
 ```
 $ tee terraform.auto.tfvars <<EOF
 region = "eu-west-1"
@@ -55,7 +59,11 @@ $ terraform apply
 
 ### Using HCP Transit Gateway
 
-Probably you can use an AWS Transit Gateway to connect all your VPCs to the HVN network. In this case you just need to put `hcp_connection_type` variable to `tgw`:
+You can also use an AWS Transit Gateway to connect all your VPCs to the HVN network.
+
+![HCP Consul with TGW](./docs/hcp-consul-tgw.png)
+
+ In this case you just need to put `hcp_connection_type` variable to `tgw`:
 
 ```
 $ tee terraform.auto.tfvars <<EOF
@@ -71,7 +79,7 @@ $ terraform apply
 ```
 
 ## Creating an HCP Consul cluster
-Also, you can create the HCP Consul Cluster, just by putting the `create_hcp` variable to `true`. In that case the value you are using in the `hcp_cluster_name` will be used as the `HCP Consul ID`. 
+If you want to create the HCP Consul Cluster you can put the `create_hcp` variable to `true`. In that case the value you are using in the `hcp_cluster_name` will be used as the `HCP Consul ID`. 
 
 > NOTE: Need more testing to check all functionality when creating a new HCP cluster
 
