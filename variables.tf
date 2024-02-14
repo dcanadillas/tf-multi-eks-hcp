@@ -45,7 +45,10 @@ variable "hcp_cluster_name" {
 variable "k8s_version" {
   description = "The Kubernetes version to use for the EKS clusters"
   default     = "1.26"
-  
+  validation {
+    condition = replace(var.k8s_version,".","") >= 126 && can(regex("1.[0-9][0-9]", var.k8s_version))
+    error_message = "K8s version must be 1.26 or higher and specified with format 1.XX"
+  }
 }
 
 variable "hcp_connection_type" {
