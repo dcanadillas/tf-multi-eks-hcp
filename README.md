@@ -16,13 +16,13 @@ You will need some AWS and HCP permissions to run this Terraform config. The sum
 * Terraform CLI installed
 * Some Unix/Linux terminal skills
 
-> NOTE: Most of the tests for this Terraform configuration have been done in Linux and MacOS. If you want to execute it in Windows I highly recommend to use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+> NOTE: Most of the tests for this Terraform configuration have been done in Linux and MacOS. If you want to execute it in Windows I highly recommend using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
 
 ## Deploy only EKS clusters (without configuring HCP)
 
 If you want to create only the specific EKS clusters, you can do it by configuring the specific variables in the `terraform.auto.tfvars` file and doing the `terraform apply`:
 ```
-$ tee terraform.auto.rtfvars <<EOF
+$ tee terraform.auto.tfvars <<EOF
 region = "eu-west-1"
 cluster_names = [ "<cluster_name_1>","<cluster_name_2>", ... ]
 k8s_version = <kubernetes_version_1.xx>
@@ -41,7 +41,7 @@ You can create a number of EKS clusters and configure the HCP platform to be abl
 
 If you want to peer every VPC of the EKS clusters to HCP platform:
 ```
-$ tee terraform.auto.rtfvars <<EOF
+$ tee terraform.auto.tfvars <<EOF
 region = "eu-west-1"
 cluster_names = [ "<cluster_name_1>","<cluster_name_2>", ... ]
 hcp_cluster_name = "<hcp_consul_id>"
@@ -58,7 +58,7 @@ $ terraform apply
 Probably you can use an AWS Transit Gateway to connect all your VPCs to the HVN network. In this case you just need to put `hcp_connection_type` variable to `tgw`:
 
 ```
-$ tee terraform.auto.rtfvars <<EOF
+$ tee terraform.auto.tfvars <<EOF
 region = "eu-west-1"
 cluster_names = [ "<cluster_name_1>","<cluster_name_2>", ... ]
 hcp_cluster_name = "<hcp_consul_id>"
@@ -76,7 +76,7 @@ Also, you can create the HCP Consul Cluster, just by putting the `create_hcp` va
 > NOTE: Need more testing to check all functionality when creating a new HCP cluster
 
 ```
-$ tee terraform.auto.rtfvars <<EOF
+$ tee terraform.auto.tfvars <<EOF
 region = "eu-west-1"
 cluster_names = [ "<cluster_name_1>","<cluster_name_2>", ... ]
 hcp_cluster_name = "<hcp_consul_id>"
@@ -93,9 +93,9 @@ $ terraform apply
 
 The Terraform configuration has some outputs that help on finding the required data to connect to your HCP Consul cluster or EKS clusters.
 
-To configure your Consul CLI credentials you can do the following:
+To configure your Consul CLI credentials you can do the following (change `public` to `private` if you are using private endpoint that is accessible for HCP Consul):
 ```
-# If your HCP cluster has a public endpoint
+# Example for public endpoint
 export CONSUL_HTTP_ADDR=$(terraform output -json consul_endpoints | jq -r .public)
 
 export CONSUL_HTTP_TOKEN=$(terraform output -raw consul_root_tokens)
