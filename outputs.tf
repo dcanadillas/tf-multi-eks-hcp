@@ -32,3 +32,14 @@ output "consul_endpoints" {
   description = "The Consul endpoints for the EKS clusters created by this module"
   value = module.hcp_consul[0].consul_urls
 }
+
+output "consul_root_tokens" {
+  description = "The Consul root tokens for the EKS clusters created by this module"
+  value = module.hcp_consul[0].consul_root_token
+  sensitive = true
+}
+
+output "region" {
+  description = "The region in which the EKS clusters are created"
+  value = var.region
+}
